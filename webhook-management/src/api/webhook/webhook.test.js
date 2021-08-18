@@ -125,6 +125,34 @@ describe('Webhook Service Test', () => {
         });
     });
 
+    it('should get webhook subscription by _id and return only 1 result', (done) => {
+        WebhookService.getWebhookById(mockWebhook._id).then((result) => {
+            expect(result.url).to.be.equal(mockWebhook.url);
+            expect(result.name).to.be.equal(mockWebhook.name);
+            expect(result.merchantId).to.be.equal(mockWebhook.merchantId);
+            expect(result.key).to.be.equal(mockWebhook.key);
+            expect(result.enabled).to.be.equal(mockWebhook.enabled);
+            expect(result).to.have.property('_id');
+            expect(result).to.have.property('createdAt');
+            expect(result).to.have.property('updatedAt');
+            done();
+        });
+    });
+
+    it('should get webhook subscription by merchant id and return only 1 result', (done) => {
+        WebhookService.getWebhookByMerchantId(mockWebhook.merchantId).then((result) => {
+            expect(result.url).to.be.equal(mockWebhook.url);
+            expect(result.name).to.be.equal(mockWebhook.name);
+            expect(result.merchantId).to.be.equal(mockWebhook.merchantId);
+            expect(result.key).to.be.equal(mockWebhook.key);
+            expect(result.enabled).to.be.equal(mockWebhook.enabled);
+            expect(result).to.have.property('_id');
+            expect(result).to.have.property('createdAt');
+            expect(result).to.have.property('updatedAt');
+            done();
+        });
+    });
+
     it('should update a webhook subscription and return total modified', (done) => {
         mockWebhook.enabled = false;
 

@@ -56,6 +56,26 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /**
+ * Return an webhook by merchant id
+ */
+router.get('/merchant/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const result = await WebhookService.getWebhookByMerchantId(id);
+
+        res.json({
+            STATUS: `RETURN WEBHOOK BY MERCHANT ID`,
+            code: res.statusCode,
+            method: req.method,
+            message: result || 'No Result Was Found',
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
  * Update an webhook by id
  */
 router.patch('/:id', validate(WebhookValidation.updateWebhook, {}, {}), async (req, res, next) => {

@@ -35,6 +35,7 @@
     },
     "dependencies": {
         "@keyv/redis": "^2.1.2",
+        "axios": "^0.21.1",
         "bull": "^3.28.1",
         "cors": "^2.8.5",
         "dotenv": "^10.0.0",

@@ -10,8 +10,8 @@ const startServer = async () => {
     const expressApp = await loaders.express.loadExpress();
     Logger.info('Express loaded');
 
-    await loaders.mongoose.loadMongoose();
-    Logger.info('Mongoose loaded');
+    // await loaders.mongoose.loadMongoose();
+    // Logger.info('Mongoose loaded');
 
     // await loaders.keyv.loadKeyv();
     // Logger.info('Keyv loaded');

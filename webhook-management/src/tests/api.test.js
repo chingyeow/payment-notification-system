@@ -84,6 +84,26 @@ describe('Webhook API Test', () => {
         });
     });
 
+    describe('GET /webhooks/merchant/:id', () => {
+        it('should return an webhook subscriptions with 200 status code', async () => {
+            const res = await request(app).get(`${config.api.prefix}/webhooks/merchant/${mockWebhook.merchantId}`);
+            expect(res.body.message).to.be.an('object');
+            expect(res.body.message).to.have.property('_id');
+            expect(res.body.message).to.have.property('createdAt');
+            expect(res.body.message).to.have.property('updatedAt');
+            expect(res.body.message).to.have.property('url');
+            expect(res.body.message).to.have.property('name');
+            expect(res.body.message).to.have.property('merchantId');
+            expect(res.body.message).to.have.property('key');
+            expect(res.body.message._id).to.be.equal(mockWebhook._id);
+            expect(res.body.message.key).to.be.equal(mockWebhook.key);
+            expect(res.body.message.url).to.be.equal(mockWebhook.url);
+            expect(res.body.message.name).to.be.equal(mockWebhook.name);
+            expect(res.body.message.merchantId).to.be.equal(mockWebhook.merchantId);
+            expect(res.statusCode).to.equal(200);
+        });
+    });
+
     describe('PATCH /webhooks/:id', () => {
         it('should update a webhook subscription and return an object of comment with 200 status code', async () => {
             const payload = {

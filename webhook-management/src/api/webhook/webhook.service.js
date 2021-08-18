@@ -41,6 +41,12 @@ const getWebhooks = () => WebhookModel.find({});
 const getWebhookById = (id) => WebhookModel.findById(id);
 
 /**
+ * Get one webhook subscription by merchant id
+ * @returns {Promise} Promise object that would resolve to all documents in the collection that was not soft deleted
+ */
+const getWebhookByMerchantId = (id) => WebhookModel.findOne({ merchantId: id });
+
+/**
  *
  * @param {string} id
  * @param {object} payload
@@ -59,6 +65,7 @@ module.exports = {
     createWebhook,
     getWebhooks,
     getWebhookById,
+    getWebhookByMerchantId,
     updateWebhookById,
     deleteWebhookById,
 };
