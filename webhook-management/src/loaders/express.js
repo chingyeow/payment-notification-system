@@ -3,7 +3,6 @@ const expressWinston = require('express-winston');
 const helmet = require('helmet');
 const cors = require('cors');
 const createError = require('http-errors');
-const { ValidationError } = require('express-validation');
 const { Logger } = require('../ultils/index');
 
 const config = require('../../config/index');

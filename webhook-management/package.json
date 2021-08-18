@@ -7,6 +7,7 @@
         "start": "node index.js",
         "start:dev": "nodemon index.js",
         "test": "cross-env NODE_ENV=test mocha \"./{,!(node_modules)/**/}*.test.js\" --timeout 5000",
+        "test:load": "artillery run src/tests/load.test.yml",
         "coverage": "nyc yarn test",
         "prettier-format": "prettier --config .prettierrc 'src/**/*.js' --write",
         "lint": "eslint .",
@@ -15,6 +16,7 @@
     "author": "Pang Ching Yeow",
     "license": "ISC",
     "devDependencies": {
+        "artillery": "^1.7.7",
         "chai": "^4.3.4",
         "cross-env": "^7.0.3",
         "eslint": "^7.31.0",
