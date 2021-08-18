@@ -1,7 +1,7 @@
 {
-    "name": "webhook-receiver",
+    "name": "webhook-sender",
     "version": "0.0.1",
-    "description": "webhook receiver service",
+    "description": "webhook sender service",
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
@@ -51,6 +51,7 @@
         "mongoose-type-url": "^2.1.0",
         "path": "^0.12.7",
         "swagger-ui-express": "^4.1.6",
+        "uuid": "^8.3.2",
         "winston": "^3.3.3"
     }
 }

@@ -1,0 +1,16 @@
+config:
+    target: 'http://localhost:8080'
+    phases:
+        # Create 100 virtual users every second (100rps) for 30 seconds:
+        - duration: 30
+          arrivalRate: 100
+          name: sustained load
+# Virtual users will run one of these scenarios.
+scenarios:
+    # Test the health of the app
+    - name: 'test GET /health endpoint'
+      flow:
+          - get:
+                url: '/api/health'
+                expect:
+                    - statusCode: 200

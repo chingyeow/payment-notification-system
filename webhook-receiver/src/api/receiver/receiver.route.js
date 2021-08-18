@@ -13,8 +13,16 @@ const router = express.Router();
  */
 router.post('/', validate(ReceiverValidation.receiveWebhook, {}, {}), async (req, res, next) => {
     try {
-        const { id, callback_id, partner_id, merchant_id, merchant_account_number, transaction_timestamp, amount } =
-            req.body;
+        const {
+            id,
+            callback_id,
+            partner_id,
+            merchant_id,
+            merchant_account_number,
+            customer_id,
+            transaction_timestamp,
+            amount,
+        } = req.body;
 
         const result = await ReceiverService.notifyMerchant(
             id,
@@ -22,6 +30,7 @@ router.post('/', validate(ReceiverValidation.receiveWebhook, {}, {}), async (req
             partner_id,
             merchant_id,
             merchant_account_number,
+            customer_id
             transaction_timestamp,
             amount
         );

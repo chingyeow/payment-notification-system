@@ -7,6 +7,7 @@ const receiveWebhook = {
         partner_id: Joi.string().required(),
         merchant_id: Joi.string().required(),
         merchant_account_number: Joi.string().required(),
+        customer_id: Joi.string().required(),
         transaction_timestamp: Joi.date().required(),
         amount: Joi.number().required(),
     }),

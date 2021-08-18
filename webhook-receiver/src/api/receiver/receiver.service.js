@@ -14,13 +14,23 @@ const { WebhookQueue } = require('../../loaders/bull');
  * @param {number} amount
  * @returns {string} Bull Queue Job ID
  */
-const notifyMerchant = async (id, callbackId, partnerId, merchantId, merchantAccount, timestamp, amount) => {
+const notifyMerchant = async (
+    id,
+    callbackId,
+    partnerId,
+    merchantId,
+    merchantAccount,
+    customerId,
+    timestamp,
+    amount
+) => {
     if (
         id === undefined ||
         callbackId === undefined ||
         partnerId === undefined ||
         merchantId === undefined ||
         merchantAccount === undefined ||
+        customerId === undefined ||
         timestamp === undefined ||
         amount === undefined ||
         id === null ||
@@ -28,6 +38,7 @@ const notifyMerchant = async (id, callbackId, partnerId, merchantId, merchantAcc
         partnerId === null ||
         merchantId === null ||
         merchantAccount === null ||
+        customerId === null ||
         timestamp === null ||
         amount === null
     ) {
@@ -43,9 +54,11 @@ const notifyMerchant = async (id, callbackId, partnerId, merchantId, merchantAcc
             partnerId,
             merchantId,
             merchantAccount,
+            customerId,
             timestamp,
             amount,
             key: response.message.key,
+            callbackUrl: response.message.url,
         },
         {
             attempts: 6,
