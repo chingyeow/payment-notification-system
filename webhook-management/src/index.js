@@ -13,6 +13,9 @@ const startServer = async () => {
     await loaders.mongoose.loadMongoose();
     Logger.info('Mongoose loaded');
 
+    await loaders.bull.loadBullListener();
+    Logger.info('Bull Queue Listener loaded');
+
     const server = http.createServer(expressApp);
     server.listen(config.port, () => {
         Logger.info(`Server listening on port ${config.port}`);

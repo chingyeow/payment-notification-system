@@ -15,6 +15,7 @@ const updateWebhook = {
         name: Joi.string(),
         merchantId: Joi.string(),
         key: Joi.string(),
+        failedJobs: Joi.array(),
     }),
 };
 

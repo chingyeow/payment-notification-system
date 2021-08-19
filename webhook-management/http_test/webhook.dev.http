@@ -20,3 +20,13 @@ GET http://{{host}}/webhooks/ HTTP/1.1
 ###
 
 GET http://{{host}}/webhooks/611ce59b7b9f4c00d5efa57e HTTP/1.1 
+
+
+###
+
+PATCH http://{{host}}/webhooks/611de9a4f43c74a30bc94955 HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "failedJobs": []
+}
