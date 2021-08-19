@@ -1,103 +1,83 @@
 version: '3.8'
 services:
-    test-redis:
-        image: bitnami/redis:latest
-        container_name: edl-redis
-        restart: always
-        ports:
-            - '6379:6379'
-        environment:
-            - REDIS_PASSWORD=P@ssw0rd
-        volumes:
-            - 'redis-data:/bitnami/redis/data'
-    test-mongodb:
-        image: mongo:latest
-        container_name: edl-mongodb
-        restart: always
-        ports:
-            - '27017:27017'
-        environment:
-            - MONGO_INITDB_DATABASE=db
-            - MONGO_INITDB_ROOT_USERNAME=root
-            - MONGO_INITDB_ROOT_PASSWORD=pass12345
-        volumes:
-            - 'mongodb-data:/data/db'
-    webhook-management-service:
-        build: ./webhook-management
-        image: webhook-management-service-image
-        container_name: webhook-management-service-app
-        restart: always
-        ports:
-            - '8080:8080'
-        depends_on:
-            - edl-redis
-            - edl-mongodb
-        volumes:
-            - 'app-logs:/usr/src/app/logs'
-        environment:
-            - NODE_ENV=development
-            - PORT=8080
-            - MONGO_URL=mongodb://root:pass12345@edl-mongodb:27017/db
-            - MONGOUSER=
-            - MONGOPASSWORD=
-            - REDIS_URL=redis://default:P@ssw0rd@edl-redis:6379
-      webhook-receiver-service:
-          build: ./webhook-receiver
-          image: webhook-receiver-service-image
-          container_name: webhook-receiver-service-app
-          restart: always
-          ports:
-              - '8081:8081'
-          depends_on:
-              - edl-redis
-              - edl-mongodb
-          volumes:
-              - 'app-logs:/usr/src/app/logs'
-          environment:
-              - NODE_ENV=development
-              - PORT=8081
-              - REDIS_URL=redis://default:P@ssw0rd@edl-redis:6379
-              - WEBHOOKS_MGMT_URL=http://localhost:8080/api/webhooks
-      webhook-sender-service:
-            build: ./webhook-sender
-            image: webhook-sender-service-image
-            container_name: webhook-sender-service-app
-            restart: always
-            ports:
-                - '8082:8082'
-            depends_on:
-                - edl-redis
-                - edl-mongodb
-            volumes:
-                - 'app-logs:/usr/src/app/logs'
-            environment:
-                - NODE_ENV=development
-                - PORT=8082
-                - REDIS_URL=redis://default:P@ssw0rd@edl-redis:6379        
-      queue-ui:
-            build: ./queue-ui
-            image: queue-ui-image
-            container_name: queue-ui-app
-            restart: always
-            ports:
-                - '3000:3000'
-            depends_on:
-                - edl-redis
-                - edl-mongodb
-            volumes:
-                - 'app-logs:/usr/src/app/logs'
-            environment:
-                - NODE_ENV=development
-                - PORT=3000
-                - REDIS_URL=redis://default:P@ssw0rd@edl-redis:6379
+  test-redis:
+    image: 'bitnami/redis:latest'
+    container_name: edl-redis
+    restart: always
+    ports:
+      - '6379:6379'
+    environment:
+      - REDIS_PASSWORD=P@ssw0rd
+    volumes:
+      - 'redis-data:/bitnami/redis/data'
+  test-mongodb:
+    image: 'mongo:latest'
+    container_name: edl-mongodb
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_DATABASE=db
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass12345
+    volumes:
+      - 'mongodb-data:/data/db'
+  webhook-management-service:
+    build: ./webhook-management
+    image: webhook-management-service-image
+    container_name: webhook-management-service-app
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - test-redis
+      - test-mongodb
+    volumes:
+      - 'app-logs:/usr/src/app/logs'
+    webhook-receiver-service:
+      build: ./webhook-receiver
+      image: webhook-receiver-service-image
+      container_name: webhook-receiver-service-app
+      restart: always
+      ports:
+        - '8081:8081'
+      depends_on:
+        - test-redis
+        - test-mongodb
+      volumes:
+        - 'app-logs:/usr/src/app/logs'
+    webhook-sender-service:
+      build: ./webhook-sender
+      image: webhook-sender-service-image
+      container_name: webhook-sender-service-app
+      restart: always
+      ports:
+        - '8082:8082'
+      depends_on:
+        - test-redis
+        - test-mongodb
+      volumes:
+        - 'app-logs:/usr/src/app/logs'
+    queue-ui:
+      build: ./queue-ui
+      image: queue-ui-image
+      container_name: queue-ui-app
+      restart: always
+      ports:
+        - '3000:3000'
+      depends_on:
+        - test-redis
+        - test-mongodb
+      volumes:
+        - 'app-logs:/usr/src/app/logs'
 networks:
-    default:
-        name: test-network
-        driver: bridge
+  default:
+    name: test-network
+    driver: bridge
 volumes:
-    redis-data:
-        name: redis-data
-    mongodb-data:
-        name: mongodb-data
-    app-logs:
-        name: app-logs
+  redis-data:
+    name: redis-data
+  mongodb-data:
+    name: mongodb-data
+  app-logs:
+    name: app-logs
