@@ -10,16 +10,7 @@ const envVarsSchema = Joi.object({
     PORT: Joi.number().default(8080),
     LOG_LEVEL: Joi.string().valid('error', 'warn', 'http', 'verbose', 'debug', 'silly').default('silly'),
     API_PREFIX: Joi.string().required(),
-    MONGOOSE_DEBUG: Joi.boolean().when('NODE_ENV', {
-        is: Joi.string().equal('development'),
-        then: Joi.boolean().default(true),
-        otherwise: Joi.boolean().default(false),
-    }),
-    MONGO_URL: Joi.string().required(),
-    MONGO_USERNAME: Joi.string().required(),
-    MONGO_PASSWORD: Joi.string().required(),
     REDIS_URL: Joi.string().required(),
-    WEBHOOKS_MGMT_URL: Joi.string().required(),
 })
     .unknown()
     .required();
@@ -39,16 +30,9 @@ const config = {
     api: {
         prefix: envVars.API_PREFIX,
     },
-    mongooseDebug: envVars.MONGOOSE_DEBUG,
-    mongo: {
-        url: envVars.MONGO_URL,
-        username: envVars.MONGO_USERNAME,
-        password: envVars.MONGO_PASSWORD,
-    },
     redis: {
         url: envVars.REDIS_URL,
     },
-    webhooksMgmtUrl: envVars.WEBHOOKS_MGMT_URL,
 };
 
 module.exports = config;

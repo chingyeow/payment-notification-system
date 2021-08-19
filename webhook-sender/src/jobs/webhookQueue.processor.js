@@ -29,7 +29,10 @@ module.exports = async (job) =>
             data: payload,
             headers: { 'X-Call-Signature': hmac },
         }).then((response) => {
-            if (response.status === 200) resolve(200);
-            else reject();
+            if (response.status === 200) {
+                resolve(200);
+            } else {
+                reject(new Error(`Webhook Queue failed due to not receiving status code 200 from merchant`));
+            }
         });
     });

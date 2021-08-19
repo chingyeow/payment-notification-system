@@ -23,6 +23,8 @@ const startServer = async () => {
     server.listen(config.port, () => {
         Logger.info(`Server listening on port ${config.port}`);
     });
+
+    Logger.info(`Webhook-Management Started!`);
 };
 
 startServer();

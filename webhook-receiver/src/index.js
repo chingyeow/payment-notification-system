@@ -10,12 +10,6 @@ const startServer = async () => {
     const expressApp = await loaders.express.loadExpress();
     Logger.info('Express loaded');
 
-    // await loaders.mongoose.loadMongoose();
-    // Logger.info('Mongoose loaded');
-
-    // await loaders.keyv.loadKeyv();
-    // Logger.info('Keyv loaded');
-
     await loaders.bull.loadQueue();
     Logger.info('Bull Queue loaded');
 
@@ -23,6 +17,8 @@ const startServer = async () => {
     server.listen(config.port, () => {
         Logger.info(`Server listening on port ${config.port}`);
     });
+
+    Logger.info(`Webhook-Receiver Started!`);
 };
 
 startServer();
