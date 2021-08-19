@@ -30,7 +30,7 @@ router.post('/', validate(ReceiverValidation.receiveWebhook, {}, {}), async (req
             partner_id,
             merchant_id,
             merchant_account_number,
-            customer_id
+            customer_id,
             transaction_timestamp,
             amount
         );
