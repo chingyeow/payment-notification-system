@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const { WebhookQueue } = require('../loaders/bull');
+const WebhookQueue = require('./index');
 const WebhookService = require('../api/webhook/webhook.service');
 
 /**

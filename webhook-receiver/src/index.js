@@ -10,9 +10,6 @@ const startServer = async () => {
     const expressApp = await loaders.express.loadExpress();
     Logger.info('Express loaded');
 
-    await loaders.bull.loadQueue();
-    Logger.info('Bull Queue loaded');
-
     const server = http.createServer(expressApp);
     server.listen(config.port, () => {
         Logger.info(`Server listening on port ${config.port}`);

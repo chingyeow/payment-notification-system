@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const config = require('../../../config');
-const { WebhookQueue } = require('../../loaders/bull');
+const WebhookQueue = require('../../jobs/index');
 
 /**
  * Notify merchant by adding to the task queue
@@ -57,8 +57,8 @@ const notifyMerchant = async (
             customerId,
             timestamp,
             amount,
-            key: response.message.key,
-            callbackUrl: response.message.url,
+            key: response.data.message.key,
+            callbackUrl: response.data.message.url,
         },
         {
             attempts: 6,

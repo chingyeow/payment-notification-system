@@ -1,0 +1,18 @@
+@hostname = localhost
+@port = 8081
+@host = {{hostname}}:{{port}}/api
+@contentType = application/json
+
+POST http://{{host}}/callback/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "id": "adskajsdhkjasdhkjashd",
+    "callback_id": "askldjalsdklaj939483204",
+    "partner_id": "klasjdklasjdlksajldkjsalkdjouqoru",
+    "merchant_id": "ljalksdj8798asdlkjl",
+    "merchant_account_number": "982309480923",
+    "customer_id": "kjhksdhfkjsdhkf99809348",
+    "transaction_timestamp": "{{$localDatetime iso8601 }}",
+    "amount": 5000
+}

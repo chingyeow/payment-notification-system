@@ -7,7 +7,7 @@ POST http://{{host}}/webhooks/ HTTP/1.1
 content-type: {{contentType}}
 
 {
-    "url": "http://www.google.com",
+    "url": "https://webhook.site/765fdfd3-14a8-4ccf-b062-b82025f70ce3",
     "name": "Testing Webhook",
     "merchantId": "ljalksdj8798asdlkjl",
     "key": "klajsdkljalksdjlkaioausoid"
